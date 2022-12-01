@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+# Advent of Code: Day 1-A
+
+import sys
+
+# Functions
+
+def read_calories():
+    curr_calories = 0
+    max_calories = 0
+
+    for line in sys.stdin:
+        if line.rstrip():
+            curr_calories += int(line)
+        else:
+            if curr_calories > max_calories: max_calories = curr_calories
+            curr_calories = 0
+    return max_calories
+
+# Main Execution
+
+def main():
+    calories = read_calories()
+    print(f'Day 1-A: {calories}')
+
+if __name__ == '__main__':
+    main()
