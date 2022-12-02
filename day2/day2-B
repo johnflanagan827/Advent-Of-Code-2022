@@ -1,0 +1,28 @@
+#! bin/usr/env python3
+
+# Advent of Code Day 2-A
+
+import sys
+
+# Functions
+
+def read_rps():
+    score = 0
+    check_score = {1: {1: 3, 2: 4, 3: 8},
+                   2: {1: 1, 2: 5, 3: 9},
+                   3: {1: 2, 2: 6, 3: 7}}
+
+    for line in sys.stdin:   
+        opponent, response = ord(line.split()[0])-64, ord(line.split()[1])-87
+        score += check_score[opponent][response]
+
+    return score
+
+# Main Execution
+
+def main():
+    score = read_rps()
+    print(f'Day 2-B: {score}')
+
+if __name__ == '__main__':
+    main()
