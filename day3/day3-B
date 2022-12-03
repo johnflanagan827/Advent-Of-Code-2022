@@ -1,0 +1,34 @@
+#! usr/bin/env python3
+
+# Advent of Code Day 3-B
+
+import sys
+
+# Functions
+
+def read_rucksack():
+    total = 0
+    for pos, line in enumerate(sys.stdin, start = 1):
+        if pos % 3 == 1:
+            first = set(line.rstrip())
+        elif pos % 3 == 2:
+            second = set(line.rstrip())
+        else:
+            third = set(line.rstrip())
+
+            for letter in first:
+                if letter in second and letter in third:
+                    if ord(letter) > 96: total += (ord(letter) - 96)
+                    else: total += (ord(letter) - 38)
+                    break
+
+    return total
+
+# Main Execution
+
+def main():
+    total = read_rucksack()
+    print(f'Day 3-B: {total}')
+    
+if __name__ == '__main__':
+    main()
