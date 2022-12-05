@@ -1,0 +1,53 @@
+#! usr/bin/env python3
+
+# Advent of Code Day 5-B
+
+import sys
+from collections import deque
+
+# Functions
+
+NUM_SLOTS = 9
+ORIGINAL_HEIGHT = 8
+
+def read_supply_stacks():
+    crates = {i:deque() for i in range(1, NUM_SLOTS+1)}
+
+    for _ in range(ORIGINAL_HEIGHT):
+        line = sys.stdin.readline().rstrip()
+        for j in range(NUM_SLOTS):
+            crate = line[4*j:4*j+4]
+            if crate.rstrip():
+                crates[j+1].append(crate)
+    
+    sys.stdin.readline()
+    sys.stdin.readline()
+
+    for line in sys.stdin:
+        num_crates = int(line.rstrip().split()[1])
+        source = int(line.rstrip().split()[3])
+        target = int(line.rstrip().split()[5])
+
+        if num_crates == 1:
+            crates[target].appendleft(crates[source].popleft())
+        else:
+            crate_list = []
+            for _ in range(num_crates):
+                crate_list.append(crates[source].popleft())
+    
+            for crate in reversed(crate_list):
+                crates[target].appendleft(crate) 
+
+    return crates
+
+# Main Execution
+
+def main():
+    crates = read_supply_stacks()
+    top_crates = ''
+    for i in range(1, 10):
+        top_crates += crates[i][0][1]
+    print(f'Day 4-B: {top_crates}')
+
+if __name__ == '__main__':
+    main()
