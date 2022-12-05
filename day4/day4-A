@@ -1,0 +1,28 @@
+#! usr/bin/env python3
+
+# Advent of Code Day 4-A
+
+import sys
+
+# Functions
+
+def read_camp_cleanup():
+    overlap = 0
+    for line in sys.stdin:
+        first_range, second_range = line.rstrip().split(',')
+        
+        first_start, first_end = first_range.split('-')
+        second_start, second_end = second_range.split('-')
+        if (int(first_start) >= int(second_start) and int(first_end) <= int(second_end)) or (int(first_start) <= int(second_start) and int(first_end) >= int(second_end)):
+             overlap += 1
+             
+    return overlap
+
+# Main Execution
+
+def main():
+    overlap = read_camp_cleanup()
+    print(f'Day 4-A: {overlap}')
+
+if __name__ == '__main__':
+    main()
